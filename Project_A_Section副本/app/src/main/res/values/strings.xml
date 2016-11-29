@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Project_A_Section</string>
+    <string name="home">首页</string>
+    <string name="gift">榜单</string>
+    <string name="category">分类</string>
+    <string name="profile">我的</string>
+    <string name="gift_title">  礼物榜</string>
+</resources>

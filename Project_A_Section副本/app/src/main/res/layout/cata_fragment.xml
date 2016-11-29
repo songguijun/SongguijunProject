@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<android.support.design.widget.TabLayout
+    android:id="@+id/cata_tb"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"></android.support.design.widget.TabLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+       >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:backgroundTint="#eadee5"
+        android:background="@drawable/shape"
+        android:text="   搜索单品、攻略"
+        android:textColor="#afa0ab"
+        android:textSize="10sp"
+        android:gravity="center"
+        />
+     <ImageView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="120dp"
+         android:layout_marginTop="7dp"
+         android:background="@mipmap/abc_ic_search_api_holo_light"/>
+    </RelativeLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/cata_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+</LinearLayout>
