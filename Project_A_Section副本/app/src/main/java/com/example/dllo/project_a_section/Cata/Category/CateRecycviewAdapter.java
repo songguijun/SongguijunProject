@@ -44,7 +44,7 @@ public class CateRecycviewAdapter extends RecyclerView.Adapter{
 
     @Override
     public int getItemViewType(int position) {
-        return data.get(position).getType();
+        return COUNT;
     }
 
     @Override
