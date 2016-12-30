@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="300dp">
+    android:layout_height="300dp"
+    android:id="@+id/liner">
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,13 +16,11 @@
                 android:layout_height="200dp"
                 android:layout_weight="10"
                 android:scaleType="fitXY"
-                android:id="@+id/iv_item_fragment_list"
-                android:background="@mipmap/ic_launcher"/>
+                android:id="@+id/iv_item_fragment_list" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="31dp"
                 android:text="aaaaaa"
-
                 android:textColor="@android:color/black"
                 android:id="@+id/tv_item_fragment_list_title"/>
             <TextView

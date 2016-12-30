@@ -1,5 +1,6 @@
 package com.example.dllo.project_a_section.Gift;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,8 +35,10 @@ import java.util.ArrayList;
 public class GiftRecommendFragment extends BeasFragment {
     private ArrayList<GiftRecommentBean>data;
     private RecyclerView recyclerView;
+    private GiftRecommendAdapter adapter;
+    private ImageView im ;
     private String rem;
-
+    private String url = "http://api.liwushuo.com/v2/ranks_v3/ranks/1?limit=20&offset=40";
 
     @Override
     protected int setLayout() {
@@ -45,16 +49,21 @@ public class GiftRecommendFragment extends BeasFragment {
     protected void initView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.gift_recommend_rv);
 
+
     }
 
     @Override
     public void initData() {
+
         data = new ArrayList<>();
         Bundle mBundle = getArguments();
         String mgs = mBundle.get("key").toString();
         rem = "http://api.liwushuo.com/v2/ranks_v3/ranks/"+mgs+"?limit=20&offset=0";
         Result();
     }
+
+
+
     public static GiftRecommendFragment newInstance(int pos){
         Bundle bundle = new Bundle();
         String massage = TabAdapter_Gift.getMessage(pos);
@@ -63,7 +72,7 @@ public class GiftRecommendFragment extends BeasFragment {
         fragment.setArguments(bundle);
         return fragment;
     }
-    public void Result(){
+       public void Result(){
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         StringRequest stringRequest = new StringRequest(rem, new Response.Listener<String>() {
             @Override
@@ -71,7 +80,7 @@ public class GiftRecommendFragment extends BeasFragment {
                 Gson gson = new Gson();
                 GiftRecommentBean bean = gson.fromJson(response, GiftRecommentBean.class);
                 data.add(bean);
-                GiftRecommendAdapter adapter = new GiftRecommendAdapter(getContext());
+                adapter = new GiftRecommendAdapter(getContext());
                 adapter.setData(data);
                 recyclerView.setAdapter(adapter);
                 GridLayoutManager manager = new GridLayoutManager(getActivity(),2);
@@ -86,5 +95,9 @@ public class GiftRecommendFragment extends BeasFragment {
         requestQueue.add(stringRequest);
 
     }
+
+
+
+
 
     }

@@ -64,7 +64,7 @@ public class MyListViewAdapter extends BaseAdapter {
             holder.textView_Article.setText(data.get(0).getData().getItems().get(i).getTitle());
             holder.textView_opuscule.setText(data.get(0).getData().getItems().get(i).getIntroduction());
         //    holder.textView_hart.setText(data.get(0).getData().getItems().get(i).getLikes_count());
-            holder.textView_column.setText(data.get(0).getData().getItems().get(i).getColumn().getTitle());
+//            holder.textView_column.setText(data.get(0).getData().getItems().get(i).getColumn().getTitle());
             Picasso.with(context).load(data.get(0).getData().getItems().get(i).getCover_image_url()).into(holder.imageView_pager);
             Picasso.with(context).load(data.get(0).getData().getItems().get(i).getAuthor().getAvatar_url()).into(holder.imageView_Head_portrait);
         }

@@ -7,14 +7,6 @@ import java.util.List;
  */
 
 public class BannerBean {
-
-
-    /**
-     * code : 200
-     * data : {"banners":[{"ad_monitors":[],"channel":"all","id":793,"image_url":"http://img01.liwushuo.com/image/161123/bf7tp15l8.jpg-w720","order":830,"status":0,"target_id":null,"target_type":"url","target_url":"liwushuo:///page?url=https%3A%2F%2Fevent.liwushuo.com%2Fadmin%2Fevent%2F36&page_action=navigation&login=false&type=url","type":"url","webp_url":"http://img01.liwushuo.com/image/161123/bf7tp15l8.jpg?imageView2/2/w/720/q/85/format/webp"},{"ad_monitors":[],"channel":"all","id":791,"image_url":"http://img01.liwushuo.com/image/161121/605lxnijj.jpg-w720","order":827,"status":0,"target":{"banner_image_url":"http://img01.liwushuo.com/image/161121/tbdi0o0jy.jpg-w300","banner_webp_url":"http://img01.liwushuo.com/image/161121/tbdi0o0jy.jpg?imageView2/2/w/300/q/85/format/webp","cover_image_url":"http://img01.liwushuo.com/image/161121/c7t1ca0ok.jpg-w720","cover_webp_url":"http://img01.liwushuo.com/image/161121/c7t1ca0ok.jpg?imageView2/2/w/720/q/85/format/webp","created_at":1479722715,"id":393,"posts_count":6,"status":1,"subtitle":"那句说不出口的谢谢，小礼君帮你说","title":"感恩节礼物场","updated_at":1479722844},"target_id":393,"target_type":"url","target_url":"liwushuo:///page?page_action=navigation&login=false&type=topic&topic_id=393","type":"collection","webp_url":"http://img01.liwushuo.com/image/161121/605lxnijj.jpg?imageView2/2/w/720/q/85/format/webp"},{"ad_monitors":[],"channel":"all","id":790,"image_url":"http://img02.liwushuo.com/image/161121/m8w7dtl89.jpg-w720","order":826,"status":0,"target_id":1046636,"target_type":"url","target_url":"liwushuo:///page?page_action=navigation&login=false&type=post&post_id=1046636","type":"post","webp_url":"http://img02.liwushuo.com/image/161121/m8w7dtl89.jpg?imageView2/2/w/720/q/85/format/webp"},{"ad_monitors":[],"channel":"all","id":789,"image_url":"http://img01.liwushuo.com/image/161121/xq20q902p.jpg-w720","order":825,"status":0,"target_id":null,"target_type":"url","target_url":"liwushuo:///page?url=https%3A%2F%2Fevent.liwushuo.com%2Fadmin%2Fevent%2F34&page_action=navigation&login=false&type=url","type":"url","webp_url":"http://img01.liwushuo.com/image/161121/xq20q902p.jpg?imageView2/2/w/720/q/85/format/webp"},{"ad_monitors":[],"channel":"all","id":730,"image_url":"http://img02.liwushuo.com/image/161114/74ozwewrz.jpg-w720","order":500,"status":0,"target_id":null,"target_url":"liwushuo:///page?type=dailylucky","type":"url","webp_url":"http://img02.liwushuo.com/image/161114/74ozwewrz.jpg?imageView2/2/w/720/q/85/format/webp"}]}
-     * message : OK
-     */
-
     private int code;
     private DataBean data;
     private String message;
@@ -53,34 +45,19 @@ public class BannerBean {
         public void setBanners(List<BannersBean> banners) {
             this.banners = banners;
         }
-
+    }
         public static class BannersBean {
-            /**
-             * ad_monitors : []
-             * channel : all
-             * id : 793
-             * image_url : http://img01.liwushuo.com/image/161123/bf7tp15l8.jpg-w720
-             * order : 830
-             * status : 0
-             * target_id : null
-             * target_type : url
-             * target_url : liwushuo:///page?url=https%3A%2F%2Fevent.liwushuo.com%2Fadmin%2Fevent%2F36&page_action=navigation&login=false&type=url
-             * type : url
-             * webp_url : http://img01.liwushuo.com/image/161123/bf7tp15l8.jpg?imageView2/2/w/720/q/85/format/webp
-             * target : {"banner_image_url":"http://img01.liwushuo.com/image/161121/tbdi0o0jy.jpg-w300","banner_webp_url":"http://img01.liwushuo.com/image/161121/tbdi0o0jy.jpg?imageView2/2/w/300/q/85/format/webp","cover_image_url":"http://img01.liwushuo.com/image/161121/c7t1ca0ok.jpg-w720","cover_webp_url":"http://img01.liwushuo.com/image/161121/c7t1ca0ok.jpg?imageView2/2/w/720/q/85/format/webp","created_at":1479722715,"id":393,"posts_count":6,"status":1,"subtitle":"那句说不出口的谢谢，小礼君帮你说","title":"感恩节礼物场","updated_at":1479722844}
-             */
-
             private String channel;
             private int id;
             private String image_url;
             private int order;
             private int status;
-            private Object target_id;
+            private TargetBean target;
+            private int target_id;
             private String target_type;
             private String target_url;
             private String type;
             private String webp_url;
-            private TargetBean target;
             private List<?> ad_monitors;
 
             public String getChannel() {
@@ -123,11 +100,19 @@ public class BannerBean {
                 this.status = status;
             }
 
-            public Object getTarget_id() {
+            public TargetBean getTarget() {
+                return target;
+            }
+
+            public void setTarget(TargetBean target) {
+                this.target = target;
+            }
+
+            public int getTarget_id() {
                 return target_id;
             }
 
-            public void setTarget_id(Object target_id) {
+            public void setTarget_id(int target_id) {
                 this.target_id = target_id;
             }
 
@@ -163,14 +148,6 @@ public class BannerBean {
                 this.webp_url = webp_url;
             }
 
-            public TargetBean getTarget() {
-                return target;
-            }
-
-            public void setTarget(TargetBean target) {
-                this.target = target;
-            }
-
             public List<?> getAd_monitors() {
                 return ad_monitors;
             }
@@ -178,22 +155,9 @@ public class BannerBean {
             public void setAd_monitors(List<?> ad_monitors) {
                 this.ad_monitors = ad_monitors;
             }
+        }
 
             public static class TargetBean {
-                /**
-                 * banner_image_url : http://img01.liwushuo.com/image/161121/tbdi0o0jy.jpg-w300
-                 * banner_webp_url : http://img01.liwushuo.com/image/161121/tbdi0o0jy.jpg?imageView2/2/w/300/q/85/format/webp
-                 * cover_image_url : http://img01.liwushuo.com/image/161121/c7t1ca0ok.jpg-w720
-                 * cover_webp_url : http://img01.liwushuo.com/image/161121/c7t1ca0ok.jpg?imageView2/2/w/720/q/85/format/webp
-                 * created_at : 1479722715
-                 * id : 393
-                 * posts_count : 6
-                 * status : 1
-                 * subtitle : 那句说不出口的谢谢，小礼君帮你说
-                 * title : 感恩节礼物场
-                 * updated_at : 1479722844
-                 */
-
                 private String banner_image_url;
                 private String banner_webp_url;
                 private String cover_image_url;
@@ -295,5 +259,4 @@ public class BannerBean {
                 }
             }
         }
-    }
-}
+

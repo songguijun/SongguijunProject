@@ -1,92 +1,105 @@
 package com.example.dllo.project_a_section.Cata.CateRvLv;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dllo.project_a_section.R;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
+import java.util.List;
+
+import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 /**
  * Created by dllo on 16/11/29.
  */
 
-public class SingRvAdapter  extends RecyclerView.Adapter {
-    private ArrayList<SingBean>data;
-    private Context context ;
-    public static final  int ONE = 0 ;
-    public static final int TWO = 1 ;
-    private static  final int COUNT = 4;
+public class SingRvAdapter  extends BaseAdapter  {
+    List<SingBean.DataBean.CategoriesBean> datas;
+    private Context context;
+    private int selectIndex;
+    private List<SingBean.DataBean.CategoriesBean.SubcategoriesBean> list;
+
     public SingRvAdapter(Context context) {
         this.context = context;
     }
 
-    public void setData(ArrayList<SingBean> data) {
-        this.data = data;
+    public void setDatas(List<SingBean.DataBean.CategoriesBean> datas) {
+        this.datas = datas;
+        notifyDataSetChanged();
+    }
+
+    public void setSelectIndex(int selectIndex) {
+        this.selectIndex = selectIndex;
+        notifyDataSetChanged();
+    }
+
+    public void setList(List<SingBean.DataBean.CategoriesBean.SubcategoriesBean> list) {
+        this.list = list;
         notifyDataSetChanged();
     }
 
     @Override
-    public int getItemViewType(int position) {
-        return COUNT;
+    public int getCount() {
+        return datas!=null&&datas.size()>0?datas.size():0;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder holder = null;
-        switch (viewType){
-            case ONE:
-                View viewOne = LayoutInflater.from(context).inflate(R.layout.item_hard_rv_sing,parent,false);
-                holder = new MyViewHolder(viewOne);
-                break;
-            case TWO:
-                View viewTwo = LayoutInflater.from(context).inflate(R.layout.item_rv_sing,parent,false);
-                holder = new MyViewHolderOne(viewTwo);
-        }
-        return holder;
+    public Object getItem(int i) {
+        return datas!=null?datas.get(i):null;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-          int type = getItemViewType(position);
-        switch (type){
-            case ONE:
-                MyViewHolder  holderOne = (MyViewHolder) holder;
-                holderOne.textViewName.setText(data.get(0).getData().getCategories().get(position).getName());
-                break;
-            case TWO:
-                MyViewHolderOne holderTwo = (MyViewHolderOne) holder;
-                holderTwo.textView.setText(data.get(1).getData().getCategories().get(position).getName());
-                Picasso.with(context).load(data.get(0).getData().getCategories().get(position).getIcon_url()).into(holderTwo.imageView);
-        }
+    public long getItemId(int i) {
+        return i;
     }
 
     @Override
-    public int getItemCount() {
-        return data != null && data.size()>0 ? data.size(): 0;
-    }
+    public View getView(int i, View view, ViewGroup viewGroup) {
+        MyRightViewHolder holder = null;
+        if (view == null){
+            view = LayoutInflater.from(context).inflate(R.layout.item_hard_rv_sing,viewGroup,false);
 
-    class MyViewHolder extends  RecyclerView.ViewHolder{
-        private TextView textViewName ;
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            textViewName = (TextView) itemView.findViewById(R.id.tv_rv__hard_sing);
+            holder = new MyRightViewHolder(view);
+            view.setTag(holder);
+        }else {
+            holder = (MyRightViewHolder) view.getTag();
         }
+
+        SingBean.DataBean.CategoriesBean bean = datas.get(i);
+        if (bean.getName().equals("热门分类")){
+           // holder.tv.setText(" ");
+       //     holder.mview.setBackgroundColor(Color.WHITE);
+        }else {
+            holder.tv.setText(bean.getName());
+      //      holder.mview.setBackgroundColor(Color.argb(255,255,255,255));
+        }
+        SingAdapterGird adapterGird = new SingAdapterGird(context);
+        list = new ArrayList<>();
+        list = bean.getSubcategories();
+        adapterGird.setDatas(list);
+        holder.gv.setAdapter(adapterGird);
+        return view;
     }
-    class MyViewHolderOne extends  RecyclerView.ViewHolder{
-        private ImageView imageView;
-        private TextView textView;
-        public MyViewHolderOne(View itemView) {
-            super(itemView);
-            textView = (TextView)itemView.findViewById(R.id.item_rv_sing_tv);
-            imageView = (ImageView) itemView.findViewById(R.id.item_rv_sing_iv);
+    public  void setIndex(int index){
+        selectIndex = index;
+    }
+
+    class MyRightViewHolder{
+        private TextView tv;
+        private GridView gv;
+        private View mview;
+        public MyRightViewHolder(View view){
+            tv = (TextView) view.findViewById(R.id.tv_rv__hard_sing);
+            gv = (GridView) view.findViewById(R.id.sing_gv);
         }
     }
 }

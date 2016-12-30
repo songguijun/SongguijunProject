@@ -1,5 +1,6 @@
 package com.example.dllo.project_a_section.TabLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.android.volley.RequestQueue;
@@ -16,6 +18,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dllo.project_a_section.Home.GIrLBean;
 import com.example.dllo.project_a_section.Home.GirlAdapter;
+import com.example.dllo.project_a_section.Home.GirlWebViewActivity;
 import com.example.dllo.project_a_section.R;
 import com.google.gson.Gson;
 
@@ -75,11 +78,20 @@ public class HomeSiftFragment extends Fragment {
             public void onResponse(String response) {
                 Log.d("数据",response);
                 Gson gson = new Gson();
-                GIrLBean bean = gson.fromJson(response,GIrLBean.class);
+                final GIrLBean bean = gson.fromJson(response,GIrLBean.class);
                 GirlAdapter adapter = new GirlAdapter(getContext());
                 data.add(bean);
                 adapter.setData(data);
                 listView.setAdapter(adapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent intent = new Intent(getContext(), GirlWebViewActivity.class);
+                        String GirlId = bean.getData().getItems().get(i).getId()+"";
+                        intent.putExtra("Girl",GirlId);
+                        startActivity(intent);
+                    }
+                });
             }
         }, new Response.ErrorListener() {
             @Override

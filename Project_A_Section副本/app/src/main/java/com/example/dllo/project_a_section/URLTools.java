@@ -14,4 +14,7 @@ public class URLTools {
     public static final String TABGIRL = "http://api.liwushuo.com/v2/ranks_v2/ranks";
     public static final String CATERAIDERS = "http://api.liwushuo.com/v2/columns?limit=20&offset=0";
     public static final String CATEGORY = "http://api.liwushuo.com/v2/channel_groups/all";
+    public static final String RAIDERSONE = "http://api.liwushuo.com/v2/columns";
+    public static final String RAIDERSTWO = "http://api.liwushuo.com/v2/channel_groups/all";
+    public static final String SING = "http://api.liwushuo.com/v2/item_categories/tree";
 }

@@ -10,23 +10,39 @@ import android.widget.TextView;
 import com.example.dllo.project_a_section.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by dllo on 16/11/29.
  */
 
 public class SingLvAdapter extends BaseAdapter {
-    private ArrayList<SingBean>data;
+    List<SingBean.DataBean.CategoriesBean> data;
     private Context context ;
-    @Override
-    public int getCount() {
-        return data.get(0).getData().getCategories().size();
+    private int selectIndex;
+
+    public void setData(List<SingBean.DataBean.CategoriesBean> data) {
+        this.data = data;
+        notifyDataSetChanged();
+    }
+
+    public SingLvAdapter(Context context) {
+        this.context = context;
+    }
+
+    public void setSelectIndex(int selectIndex) {
+        this.selectIndex = selectIndex;
     }
 
     @Override
-    public Object getItem(int i) {
-        return data != null ? data.get(0).getData().getCategories().get(i):null;
+    public int getCount() {
+        return data != null && data.size()>0?data.size():0;
     }
+    @Override
+    public Object getItem(int i) {
+        return data != null ?data.get(i):null;
+    }
+
 
     @Override
     public long getItemId(int i) {
@@ -43,9 +59,15 @@ public class SingLvAdapter extends BaseAdapter {
         }else {
             holder = (MyViewHolder) view.getTag();
         }
-        holder.textView.setText(data.get(0).getData().getCategories().get(i).getName());
+        holder.textView.setText(data.get(i).getName());
         return view;
     }
+
+    public  void setIndex(int index){
+        selectIndex = index;
+    }
+
+
     class MyViewHolder{
          private TextView textView ;
         public MyViewHolder (View view){
